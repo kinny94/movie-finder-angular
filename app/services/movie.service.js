@@ -9,23 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var movie_service_1 = require('../../services/movie.service');
-var MoviesComponent = (function () {
-    function MoviesComponent(_movieService) {
-        this._movieService = _movieService;
-        this._movieService.getPopular().subscribe(function (res) {
-            console.log(res.results);
-        });
+var http_1 = require('@angular/http');
+require('rxjs/Rx');
+var MovieService = (function () {
+    function MovieService(_jsonp) {
+        this._jsonp = _jsonp;
+        this.apiKey = 'b63f3b60776f510d0be5712e50e1cd35';
+        console.log('MovieServiceInitilized');
     }
-    MoviesComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'movies',
-            templateUrl: 'movies.component.html'
-        }), 
-        __metadata('design:paramtypes', [movie_service_1.MovieService])
-    ], MoviesComponent);
-    return MoviesComponent;
+    MovieService.prototype.getPopular = function () {
+        return this._jsonp.get("https://api.themoviedb.org/3/discover/movie?callback=JSONP_CALLBACK&sort_by=popularity.desc&api_key=b63f3b60776f510d0be5712e50e1cd35")
+            .map(function (res) { return res.json(); });
+    };
+    MovieService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Jsonp])
+    ], MovieService);
+    return MovieService;
 }());
-exports.MoviesComponent = MoviesComponent;
-//# sourceMappingURL=movies.component.js.map
+exports.MovieService = MovieService;
+//# sourceMappingURL=movie.service.js.map
