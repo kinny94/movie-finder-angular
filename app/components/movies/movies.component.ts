@@ -10,6 +10,8 @@ export class MoviesComponent {
 
     popularList:Array<Object>;
     inTheatersList:Array<Object>;
+    searchStr:string;
+    searchRes: Array<Object>;
 
     constructor(private _movieService: MovieService){
         this._movieService.getPopular().subscribe(res => {
@@ -19,5 +21,11 @@ export class MoviesComponent {
         this._movieService.getInTheaters().subscribe(res => {
             this.inTheatersList = res.results;
         });
+    }
+
+    searchMovies(){
+        this._movieService.searchMovies(this.searchStr).subscribe(res => {
+            this.searchRes = res.results;
+        })
     }
 }

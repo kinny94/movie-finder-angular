@@ -21,6 +21,12 @@ var MoviesComponent = (function () {
             _this.inTheatersList = res.results;
         });
     }
+    MoviesComponent.prototype.searchMovies = function () {
+        var _this = this;
+        this._movieService.searchMovies(this.searchStr).subscribe(function (res) {
+            _this.searchRes = res.results;
+        });
+    };
     MoviesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
