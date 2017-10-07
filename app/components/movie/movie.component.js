@@ -11,33 +11,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var movie_service_1 = require('../../services/movie.service');
 var router_1 = require('@angular/router');
-var MoviesComponent = (function () {
-    function MoviesComponent(_movieService) {
-        var _this = this;
+var router_2 = require('@angular/router');
+var MovieComponent = (function () {
+    function MovieComponent(router, _movieService) {
+        this.router = router;
         this._movieService = _movieService;
-        this._movieService.getPopular().subscribe(function (res) {
-            _this.popularList = res.results;
-        });
-        this._movieService.getInTheaters().subscribe(function (res) {
-            _this.inTheatersList = res.results;
-        });
     }
-    MoviesComponent.prototype.searchMovies = function () {
+    MovieComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._movieService.searchMovies(this.searchStr).subscribe(function (res) {
-            _this.searchRes = res.results;
+        this.router.params.subscribe(function (params) {
+            var id = params['id'];
+            _this._movieService.getMovie(id).subscribe(function (movie) {
+                _this.movie = movie;
+            });
         });
     };
-    MoviesComponent = __decorate([
+    MovieComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'movies',
-            templateUrl: 'movies.component.html',
-            directives: [router_1.ROUTER_DIRECTIVES]
+            selector: 'movie',
+            templateUrl: 'movie.component.html',
+            directives: [router_1.ROUTER_DIRECTIVES],
+            providers: [movie_service_1.MovieService]
         }), 
-        __metadata('design:paramtypes', [movie_service_1.MovieService])
-    ], MoviesComponent);
-    return MoviesComponent;
+        __metadata('design:paramtypes', [router_2.ActivatedRoute, movie_service_1.MovieService])
+    ], MovieComponent);
+    return MovieComponent;
 }());
-exports.MoviesComponent = MoviesComponent;
-//# sourceMappingURL=movies.component.js.map
+exports.MovieComponent = MovieComponent;
+//# sourceMappingURL=movie.component.js.map

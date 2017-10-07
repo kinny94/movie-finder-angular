@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import {MovieService} from '../../services/movie.service';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
     moduleId: module.id,
     selector: 'movies',
-    templateUrl: 'movies.component.html'
+    templateUrl: 'movies.component.html',
+    directives: [ROUTER_DIRECTIVES]
 })
 export class MoviesComponent { 
 

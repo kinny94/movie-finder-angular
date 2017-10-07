@@ -35,4 +35,9 @@ export class MovieService{
         return this._jsonp.get("https://api.themoviedb.org/3/search/movie?callback=JSONP_CALLBACK&query=" + searchStr + "&sort_by=popularity.desc&api_key=b63f3b60776f510d0be5712e50e1cd35")
         .map(res => res.json()); 
     }
+
+    getMovie(id:string){
+        return this._jsonp.get("https://api.themoviedb.org/3/movie/" + id +"?callback=JSONP_CALLBACK&api_key=b63f3b60776f510d0be5712e50e1cd35")
+        .map(res => res.json());
+    }
 }
