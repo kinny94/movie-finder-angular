@@ -7,9 +7,17 @@ import {MovieService} from '../../services/movie.service';
     templateUrl: 'movies.component.html'
 })
 export class MoviesComponent { 
+
+    popularList:Array<Object>;
+    inTheatersList:Array<Object>;
+
     constructor(private _movieService: MovieService){
         this._movieService.getPopular().subscribe(res => {
-            console.log(res.results);
+            this.popularList = res.results;
+        });
+
+        this._movieService.getInTheaters().subscribe(res => {
+            this.inTheatersList = res.results;
         });
     }
 }

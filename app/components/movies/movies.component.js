@@ -12,9 +12,13 @@ var core_1 = require('@angular/core');
 var movie_service_1 = require('../../services/movie.service');
 var MoviesComponent = (function () {
     function MoviesComponent(_movieService) {
+        var _this = this;
         this._movieService = _movieService;
         this._movieService.getPopular().subscribe(function (res) {
-            console.log(res.results);
+            _this.popularList = res.results;
+        });
+        this._movieService.getInTheaters().subscribe(function (res) {
+            _this.inTheatersList = res.results;
         });
     }
     MoviesComponent = __decorate([
